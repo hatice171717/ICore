@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Concrete
 {
-    public class Context : DbContext
+    public class Context : IdentityDbContext<AppUser>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseSqlServer("Server=302-03;Database=MvcCore_ProKamp150;User Id=WebMobile_302;Password=WebMobile_302;");
-              optionsBuilder.UseSqlServer("Server=DESKTOP-FT6FLSV\\SQLEXPRESS;Database=MvcCore_ProKamp150;integrated security=true;");
+            optionsBuilder.UseSqlServer("Server=DESKTOP-FT6FLSV\\SQLEXPRESS;Database=MvcCore_ProKamp150;integrated security=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,6 +47,9 @@ namespace DataAccessLayer.Concrete
                 .WithMany(y => y.WriterReceiver)
                 .HasForeignKey(z => z.ReceiverID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            //Bu komutu identity kurduk migrationda hata verdiği için ekledik.
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<About> Abouts { get; set; }
