@@ -1,3 +1,6 @@
+using DataAccessLayer.Concrete;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -7,6 +10,18 @@ internal class Program
     private static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        //123.video
+        builder.Services.AddDbContext<Context>();
+        builder.Services.AddIdentity<AppUser, AppRole>(x =>
+        {
+            x.Password.RequireUppercase = false;
+            x.Password.RequireNonAlphanumeric = false;
+        })
+            .AddEntityFrameworkStores<Context>();
+
+
+
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
