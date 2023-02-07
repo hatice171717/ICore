@@ -1,0 +1,10 @@
+﻿@model EntityLayer.Concrete.City
+
+<div class="form-group col-md-6">
+    <label for="exampleInputPassword2 mb-2">Şehir</label>
+    @*@Html.DropDownList("sehir",(ViewBag.sehir),"Şehir Seçiniz",new{@class="form-control dropdown" })*@
+    <select class="form-control" asp-for="CityID" asp-items="@(new SelectList(Model.CityName,"Value","Text"))">
+        <option value="">Bir Şehir Seçiniz...</option>
+    </select>
+   
+</div>

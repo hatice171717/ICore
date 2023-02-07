@@ -10,10 +10,10 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace A_ICore.Controllers
 {
-    
+    [AllowAnonymous]    
     public class RegisterController : Controller
     {
-
+        
         WriterManager wm = new WriterManager(new EfWriterRepository());
         Context c = new Context();
         [HttpGet]
@@ -26,6 +26,7 @@ namespace A_ICore.Controllers
                                                Value = x.CityID.ToString()
                                            }).ToList();
             ViewBag.sehir = values;
+
             return View();
         }
         [HttpPost]
@@ -59,6 +60,19 @@ namespace A_ICore.Controllers
 
             return View();
 
+        }
+        [HttpGet]
+        public PartialViewResult City()
+        {
+            List<SelectListItem> values = (from x in c.Cities.ToList()
+                                           select new SelectListItem
+                                           {
+                                               Text = x.CityName,
+                                               Value = x.CityID.ToString()
+                                           }).ToList();
+            ViewBag.sehir = values;
+
+            return PartialView();
         }
 
     }

@@ -17,12 +17,14 @@ namespace A_ICore.Controllers
         BlogManager bm = new BlogManager(new EfBlogRepository());
         CategoryManager cm = new CategoryManager(new EfCategoryRepository());
         Context c = new Context();
+        [AllowAnonymous]
 
         public IActionResult Index()
         {
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
+        //[AllowAnonymous]
         public IActionResult BlogReadAll(int id)
         {
             ViewBag.i = id;
@@ -112,7 +114,7 @@ namespace A_ICore.Controllers
         [HttpPost]
         public IActionResult EditBlog(Blog p)
         {
-           
+
             var blogvalue = bm.TGetById(p.BlogID);
             p.WriterID = blogvalue.WriterID;
             p.BlogCreateDate = DateTime.Parse(blogvalue.BlogCreateDate.ToShortDateString());
