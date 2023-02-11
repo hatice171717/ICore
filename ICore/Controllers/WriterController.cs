@@ -78,6 +78,7 @@ namespace A_ICore.Controllers
             values.NameSurname = model.namesurname;
             values.ImageUrl = model.imageurl;
             values.Email = model.mail;
+            values.PasswordHash = _userManager.PasswordHasher.HashPassword(values,model.password);
             var result = await _userManager.UpdateAsync(values);
 
 
@@ -129,6 +130,7 @@ namespace A_ICore.Controllers
             wm.TAdd(w);
             return RedirectToAction("Index", "Dashboard");
         }
+       
 
 
     }
