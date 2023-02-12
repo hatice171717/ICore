@@ -24,7 +24,7 @@ namespace A_ICore.Controllers
             var values = bm.GetBlogListWithCategory();
             return View(values);
         }
-        //[AllowAnonymous]
+   
         public IActionResult BlogReadAll(int id)
         {
             ViewBag.i = id;
@@ -33,7 +33,8 @@ namespace A_ICore.Controllers
         }
         public IActionResult BlogListByWriter()
         {
-            var usermail = User.Identity.Name;
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
             var values = bm.GetlistWithCategoryByWriterBm(writerID);
             return View(values);
@@ -56,9 +57,10 @@ namespace A_ICore.Controllers
         [HttpPost]
         public IActionResult BlogAdd(Blog p)
         {
-            var usermail = User.Identity.Name;
+            var username = User.Identity.Name;
+            var usermail = c.Users.Where(x => x.UserName == username).Select(y => y.Email).FirstOrDefault();
             var writerID = c.Writers.Where(x => x.WriterMail == usermail).Select(y => y.WriterID).FirstOrDefault();
-            var values = bm.GetlistWithCategoryByWriterBm(writerID);
+
 
             BlogValidator bv = new BlogValidator();
             ValidationResult results = bv.Validate(p);
