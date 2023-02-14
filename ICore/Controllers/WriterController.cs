@@ -51,6 +51,7 @@ namespace A_ICore.Controllers
         [AllowAnonymous]
         public PartialViewResult WriterNavbarPartial()
         {
+                     
             return PartialView();
         }
         [AllowAnonymous]
