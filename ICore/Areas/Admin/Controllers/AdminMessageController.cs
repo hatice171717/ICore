@@ -28,6 +28,11 @@ namespace A_ICore.Areas.Admin.Controllers
             var values = mm.GetSendBoxListWriter(writerID);
             return View(values);
         }
+     
+        public IActionResult ComposeMessage()
+        {
+            return View();
+        }
 
     }
 }
