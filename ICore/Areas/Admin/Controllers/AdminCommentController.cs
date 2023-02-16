@@ -11,7 +11,7 @@ namespace A_ICore.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var values = commentManager.GetCommentwithBlog();
-            return View();
+            return View(values);
         }
     }
 }
