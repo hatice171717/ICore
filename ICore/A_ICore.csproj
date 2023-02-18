@@ -43,8 +43,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Test\Controllers\" />
-    <Folder Include="Areas\Test\Views\" />
     <Folder Include="wwwroot\WriterImageFiles\" />
   </ItemGroup>
 
