@@ -1,4 +1,5 @@
-﻿using A_ICore.Models;
+﻿using A_ICore.Areas.Admin.Models;
+using A_ICore.Models;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,12 @@ namespace A_ICore.Areas.Admin.Controllers
     public class AdminRolController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
+        private readonly UserManager<AppUser> _userManager;
 
-        public AdminRolController(RoleManager<AppRole> roleManager)
+        public AdminRolController(RoleManager<AppRole> roleManager, UserManager<AppUser> userManager)
         {
             _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -79,6 +82,36 @@ namespace A_ICore.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+        public IActionResult UserRoleList()
+        {
+            var values = _userManager.Users.ToList();
+            return View(values);
+        }
+        [HttpGet]
+        public async Task<IActionResult> AssignRol(int id)
+        {
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == id);
+            var roles = _roleManager.Roles.ToList();
+
+            TempData["Userid"] = user.Id;
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            List<RoleAssignViewModel> model = new List<RoleAssignViewModel>();
+
+            foreach (var item in roles)
+            {
+                RoleAssignViewModel m = new RoleAssignViewModel();
+                m.RoleID = item.Id;
+                m.Name = item.Name;
+                m.Exists = userRoles.Contains(item.Name);
+                model.Add(m);
+
+            }
+
+
+
+            return View(model);
         }
     }
 }
