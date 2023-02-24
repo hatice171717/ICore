@@ -1,5 +1,4 @@
-﻿Yorumlar
-Rolleme
+﻿Rolleme
 Json Web Token (jwt)
 Entity Framework Responsibility Minimize
 Deploy
