@@ -47,6 +47,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\403forbidden\README.markdown" />
     <None Include="wwwroot\inspinia-gh-pages\.gitignore" />
     <None Include="wwwroot\inspinia-gh-pages\css\bootstrap.css.map" />
     <None Include="wwwroot\inspinia-gh-pages\css\bootstrap.min.css.map" />
