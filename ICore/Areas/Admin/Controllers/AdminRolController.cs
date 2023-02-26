@@ -2,12 +2,14 @@
 using A_ICore.Models;
 using DocumentFormat.OpenXml.Office.CustomUI;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace A_ICore.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,Moderator")]
     public class AdminRolController : Controller
     {
         private readonly RoleManager<AppRole> _roleManager;
