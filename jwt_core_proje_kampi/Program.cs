@@ -33,6 +33,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+//147.video
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
